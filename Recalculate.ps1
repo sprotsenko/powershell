@@ -1,8 +1,12 @@
 $linesNumber = 0
+$filePath = 'C:\Working Documentation\recalculate.txt'
+$numberOfIterations = [Math]::Ceiling((Get-Content -Path $filePath).Length/400)
 
-# Read the first 400 lines from the end of file
+for($i=1; $i -le $numberOfIterations; $i++){
+
+# Read the first 400 lines from the beggining of file
+[string[]]$barcodeSet = Get-Content -Path $filePath | select -first 400 -skip $linesNumber
 $linesNumber=$linesNumber+400
-[string[]]$barcodeSet = Get-Content -Path 'C:\Working Documentation\recalculate.txt' -Tail $linesNumber
 
 # Prepare the request body
 [string]$body = "["
@@ -13,6 +17,7 @@ foreach($barcode in $barcodeSet){
     $body = $body + "]"
     $body
 
+}
     # Make a recalculation API request
 
 try {
