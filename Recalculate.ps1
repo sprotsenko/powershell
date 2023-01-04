@@ -15,16 +15,15 @@ foreach($barcode in $barcodeSet){
 }
     $body = $body.Substring(0,$body.Length-1)
     $body = $body + "]"
-    $body
 
-}
-    # Make a recalculation API request
 
+# Make a recalculation API request
 try {
 
-    $r = Invoke-RestMethod -Method PUT -Uri http://10.255.102.215:8080/UkrPostAPI/shipments/recalculation/barcode?token=debf2025-78c6-42ea-b120-21dce332ac15 -Body ($body)
-    $r   
+    $req = Invoke-RestMethod -Method PUT -Uri http://10.255.102.215:8080/UkrPostAPI/shipments/recalculation/barcode?token=debf2025-78c6-42ea-b120-21dce332ac15 -Body ($body)
+    $req   
 }
 catch {
     throw "Unnable to recalculate the provided barcode list"
+}
 }
