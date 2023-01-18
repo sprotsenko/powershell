@@ -1,5 +1,10 @@
+Function MassRecalculate {
+    param (
+        $filePath
+    )
+
 $linesNumber = 0
-$filePath = 'E:\recalculate.txt'
+#$filePath = 'C:\Working Documentation\recalculate.txt'
 $numberOfIterations = [Math]::Ceiling((Get-Content -Path $filePath).Length/400)
 
 for($i=1; $i -le $numberOfIterations; $i++){
@@ -24,5 +29,6 @@ try {
 }
 catch {
     throw "Unnable to recalculate the provided barcode list"
+}
 }
 }
